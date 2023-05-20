@@ -3,7 +3,11 @@
   "displayName": "Extend Zowe Explorer with New View",
   "description": "Sample code for Zowe Explorer Extender to create a new view",
   "publisher": "Billie Jean Simmons",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "none",
+  "repository": {
+    "url": "https://github.com/JillieBeanSim/zowe_explorer_extender_newView"
+  },
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -14,14 +18,14 @@
     "onStartupFinished"
   ],
   "extensionDependencies": [
-    "zowe.vscode-extension-for-zowe"
+    "Zowe.vscode-extension-for-zowe"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "views": {
       "zowe": [
         {
-          "id": "zowe-explorer-extender-newview",
+          "id": "ze-extender-new-view",
           "name": "Extender New View"
         }
       ]
@@ -29,42 +33,43 @@
     "menus": {
       "view/title": [
         {
-          "when": "view == zowe-explorer-extender-newview",
-          "command": "zowe-explorer-extender-newview.refresh",
+          "when": "view == ze-extender-new-view",
+          "command": "ze-extender-new-view.refresh",
           "group": "navigation"
         },
         {
-          "when": "view == zowe-explorer-extender-newview",
-          "command": "zowe-explorer-extender-newview.add",
+          "when": "view == ze-extender-new-view",
+          "command": "ze-extender-new-view.add",
           "group": "navigation"
         }
       ]
     },
     "commands": [
       {
-        "command": "zowe-explorer-extender-newview.refresh",
+        "command": "ze-extender-new-view.refresh",
         "title": "Refresh View",
         "category": "Zowe Explorer",
-        "icon": "./src/resources/refresh.svg"
+        "icon": "./resources/refresh.svg"
       },
       {
-        "command": "zowe-explorer-extender-newview.add",
+        "command": "ze-extender-new-view.add",
         "title": "Add profile",
         "category": "Zowe Explorer",
-        "icon": "./src/resources/plus.svg"
+        "icon": "./resources/plus.svg"
       }
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run package",
-    "build": "webpack --mode development",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "build": "yarn clean && webpack --mode development",
+    "clean": "rimraf out && rimraf dist",
+    "watch": "webpack --mode development --watch --info-verbosity verbose",
+    "package": " vsce package --yarn --no-dependencies && node ./scripts/mv-pack.js ze-extender-new-view vsix",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "vscode:prepublish": "webpack --mode production"
   },
   "dependencies": {
     "@zowe/cli": "7.14.0",
@@ -77,13 +82,22 @@
     "@types/node": "16.x",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
+    "del": "^4.1.1",
     "eslint": "^8.39.0",
     "glob": "^8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-filter": "^5.1.0",
+    "gulp-fs": "^0.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^5.0.1",
     "mocha": "^10.2.0",
     "typescript": "^5.0.4",
     "ts-loader": "^9.4.2",
     "webpack": "^5.81.0",
     "webpack-cli": "^5.0.2",
-    "@vscode/test-electron": "^2.3.0"
+    "@vscode/test-electron": "^2.3.0",
+    "vscode-nls-dev": "^4.0.0",
+    "vsce": "2.15.0"
   }
 }

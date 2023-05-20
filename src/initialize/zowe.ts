@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { getImperativeConfig } from "@zowe/cli";
 import { ZoweVsCodeExtension } from "@zowe/zowe-explorer-api";
-import { NewTree } from './view';
 
 export class Zowe {
     public static async registerProfileType(): Promise<void> {
