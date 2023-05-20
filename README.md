@@ -1,4 +1,4 @@
-# NewView README
+# Zowe Explorer Extender Sample
 
 This extension is a sample to show how extenders can add a new tree to the Zowe Explorer View of VS Code.
 It will load existing Zowe CLI SSH profile names into the new view, clicking the refresh button on the view will update the list of profiles.
