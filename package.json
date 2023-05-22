@@ -3,7 +3,7 @@
   "displayName": "Extend Zowe Explorer with New View",
   "description": "Sample code for Zowe Explorer Extender to create a new view",
   "publisher": "Billie Jean Simmons",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "none",
   "repository": {
     "url": "https://github.com/JillieBeanSim/zowe_explorer_extender_newView"
